@@ -26,7 +26,6 @@ jobs:
         with:
           install-command: npm install --legacy-peer-deps
           browser: chrome
-          config-file: cypress.config.js 
 
       - name: Publicando o relatório
         uses: peaceiris/actions-gh-pages@v3
