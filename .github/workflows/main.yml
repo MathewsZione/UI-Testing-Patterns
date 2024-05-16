@@ -1,27 +1,35 @@
-name: Exercicio modulo 26
+name: EBAC Modulo 24 CI
 
-on:
- push: 
-  branches: [main]
+on:  
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
- workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
 
-jobs: 
- tests:
-  runs-on:  ubuntu-latest
-  steps:
-   - uses: actions/checkout@v4
-   - uses: actions/setup-node@v4
-     with:
-      node-version: 18
-   - name: Cypress run
-     uses: cypress-io/github-action@v2
-     continue-on-error: true
-     with:
-      install-command: npm install
-      browser: chrome
-   - name: public-deploy
-     uses: peaceiris/actions-gh-pages@v4
-     with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: ./mochawesome-report
+      - name: Setup de ambiente Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' 
+
+      - name: Instalando dependências
+        run: npm install --legacy-peer-deps
+        
+      - name: Cypress Run
+        uses: cypress-io/github-action@v2
+        with:
+          install-command: npm install --legacy-peer-deps
+          browser: chrome
+          config-file: cypress.config.js 
+
+      - name: Publicando o relatório
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./mochawesome-report
