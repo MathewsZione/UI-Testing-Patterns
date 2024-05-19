@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:run": "npx cypress run",
+    "test:allure": "cypress run --env allure=true",
+    "build": "docker build -t ui-testing-patterns:latest .",
+    "start": "docker run --rm --name mcontainer ui-testing-patterns:latest"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +19,8 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
+  },
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.2"
   }
 }

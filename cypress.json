@@ -1,4 +1,7 @@
 {
-    "baseUrl": "http://lojaebac.ebaconline.art.br/",
-    "testFiles": "**/*.feature"
+  "baseUrl": "http://lojaebac.ebaconline.art.br/",
+  "testFiles": "**/*.feature",
+  "e2e": {
+    "setupNodeEvents": true
   }
+}
